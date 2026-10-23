@@ -1,0 +1,24 @@
+trait Transporte {
+  def costo(distancia: Double): Double
+}
+
+
+class Taxi(val costoBase: Double, val costoPorKm: Double) extends Transporte {
+  def costo(distancia: Double): Double = costoBase + (costoPorKm * distancia)
+}
+
+
+class Bus(val tarifaFija: Double) extends Transporte {
+  def costo(distancia: Double): Double = tarifaFija
+}
+
+def calcularViaje(transporte: Transporte, distancia: Double): Double = {
+  transporte.costo(distancia)
+}
+
+
+val miTaxi = new Taxi(10.0, 2.5)
+val miBus = new Bus(5.0)
+
+println(s"Costo en Taxi (5 km): ${calcularViaje(miTaxi, 5.0)}")   // Resultado: 22.5
+println(s"Costo en Bus (5 km): ${calcularViaje(miBus, 5.0)}")     // Resultado: 5.0
