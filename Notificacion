@@ -1,0 +1,30 @@
+trait Notificacion {
+  def enviar(): String
+}
+
+
+class Email(val direccion: String, val asunto: String) extends Notificacion {
+  def enviar(): String = s"Enviando Email a $direccion con asunto: '$asunto'"
+}
+
+class SMS(val numero: String) extends Notificacion {
+  def enviar(): String = s"Enviando SMS al número: $numero"
+}
+
+class NotificacionPush(val dispositivoId: String) extends Notificacion {
+  def enviar(): String = s"Enviando Push al dispositivo: $dispositivoId"
+}
+
+
+def procesarNotificacion(notificacion: Notificacion): String = {
+  notificacion.enviar()
+}
+
+
+val alertaEmail = new Email("usuario@email.com", "Bienvenida")
+val alertaSMS = new SMS("+59170000000")
+val alertaPush = new NotificacionPush("device_xyz_123")
+
+println(procesarNotificacion(alertaEmail))
+println(procesarNotificacion(alertaSMS))
+println(procesarNotificacion(alertaPush))
